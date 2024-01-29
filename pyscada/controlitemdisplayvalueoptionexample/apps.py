@@ -18,6 +18,7 @@ class PyScadaControlItemDisplayValueOptionExampleConfig(AppConfig):
     def ready(self):
         try:
             from pyscada.hmi.models import TransformData
+
             TransformData.objects.update_or_create(
                 short_name="MeanAndDivByVar",
                 defaults={
@@ -35,6 +36,7 @@ class PyScadaControlItemDisplayValueOptionExampleConfig(AppConfig):
 
         try:
             from pyscada.hmi.models import DisplayValueOptionTemplate
+
             # create the circular gauge for control item display value option
             DisplayValueOptionTemplate.objects.update_or_create(
                 label="Example",

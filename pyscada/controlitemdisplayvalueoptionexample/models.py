@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from pyscada.hmi.models import DisplayValueOption, TransformData
 from pyscada.models import Variable
 
+
 class TransformDataMeanAndDivByVar(models.Model):
     display_value_option = models.OneToOneField(
         DisplayValueOption, on_delete=models.CASCADE
@@ -17,9 +18,11 @@ class TransformDataMeanAndDivByVar(models.Model):
         def clean(self):
             super().clean()
             class_name = self.model.__name__
-            if self.data["transform_data"] != "" and TransformData.objects.get(
-                id=self.data["transform_data"]
-            ) is not None:
+            if (
+                self.data["transform_data"] != ""
+                and TransformData.objects.get(id=self.data["transform_data"])
+                is not None
+            ):
                 transform_data_name = TransformData.objects.get(
                     id=self.data["transform_data"]
                 ).inline_model_name
